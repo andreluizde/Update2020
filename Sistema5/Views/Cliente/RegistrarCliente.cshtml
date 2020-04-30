@@ -1,0 +1,138 @@
+﻿@model Cliente
+
+<h2>Registrar Cliente</h2>
+<body>
+    <div class="row">
+        <div class="col-md-4">
+            @if (TempData["ClienteHomeFalhou"] != null)
+            {
+                <p class="alert alert-danger">@TempData["ClienteHomeFalhou"]</p>
+            }
+            <form asp-action="RegistrarCliente">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Nome" class="control-label"></label>
+                    <input asp-for="Nome" class="form-control" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CPF_CNPJ" class="control-label"></label>
+                    <input type="text" id="CPF_CNPJ" asp-for="CPF_CNPJ" class="form-control" style="height: 39px" />
+                    <span asp-validation-for="CPF_CNPJ" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RG" class="control-label"></label>
+                    <input asp-for="RG" class="form-control" />
+                    <span asp-validation-for="RG" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EstadoCivil" class="control-label"></label>
+                    <p>
+                        <select asp-for="EstadoCivil" class="form-control">
+                            <option>Selecione</option>
+                            <option value="Solteiro">Solteiro</option>
+                            <option value="Casado">Casado</option>
+                            <option value="Divorciado">Divorciado</option>
+                        </select>
+                    </p>
+                    <span asp-validation-for="EstadoCivil" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Sexo" class="control-label"></label>
+                    <p>
+                        <select asp-for="Sexo" class="form-control">
+                            <option>Selecione</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Feminino">Feminino</option>
+                        </select>
+                    </p>
+                    <span asp-validation-for="Sexo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LimiteCredito" class="control-label"></label>
+                    <input asp-for="LimiteCredito" class="form-control" />
+                    <span asp-validation-for="LimiteCredito" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Segmento" class="control-label"></label>
+                    <input asp-for="Segmento" class="form-control" />
+                    <span asp-validation-for="Segmento" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Endereco" class="control-label"></label>
+                    <input asp-for="Endereco" class="form-control" />
+                    <span asp-validation-for="Endereco" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Bairro" class="control-label"></label>
+                    <input asp-for="Bairro" class="form-control" />
+                    <span asp-validation-for="Bairro" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Numero" class="control-label"></label>
+                    <input asp-for="Numero" class="form-control" />
+                    <span asp-validation-for="Numero" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CEP" class="control-label"></label>
+                    <input asp-for="CEP" class="form-control" />
+                    <span asp-validation-for="CEP" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cidade" class="control-label"></label>
+                    <input asp-for="Cidade" class="form-control" />
+                    <span asp-validation-for="Cidade" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Estado" class="control-label"></label>
+                    <input asp-for="Estado" class="form-control" />
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Telefone" class="control-label"></label>
+                    <input asp-for="Telefone" class="form-control" />
+                    <span asp-validation-for="Telefone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="_Status" class="control-label"></label>
+                    <p>
+                        <select asp-for="_Status" class="form-control">
+                            <option>Selecione</option>
+                            <option value="Ativo">Ativo</option>
+                            <option value="Inativo">Inativo</option>
+                        </select>
+                    </p>
+                    <span asp-validation-for="_Status" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Registrar Cliente" class="btn btn-default btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <a asp-action="LoginUsuario">Retornar para o Login</a>
+    </div>
+    <script src="~/lib/jquery-mask-plugin/src/jquery.mask.js" type="text/javascript" asp-append-version="true"></script>
+</body>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script>
+        $(document).ready(function () {
+            $("#telefone").inputmask("mask", { "mask": "(99) 9999-99999" });
+            $("#CPF_CNPJ").inputmask("mask", { "mask": "999.999.999-99" }, { reverse: true });
+            $("#cep").inputmask("mask", { "mask": "99999-999" });
+            $("#nascimento").inputmask("mask", { "mask": "99/99/9999" });
+            $("#preco").inputmask("mask", { "mask": "999.999,99" }, { reverse: true });
+            $("#valor").inputmask("mask", { "mask": "#.##9,99" }, { reverse: true });
+            $("#ip").inputmask("mask", { "mask": "999.999.999.999" });
+        });
+    </script>
+}
